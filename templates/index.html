@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang='zh'>
+	% include layout/header.html config=config, title='首页'
+<body>
+	% include layout/navbar.html config=config
+	<div id="content">
+		<div class="container">
+			<div class="row">
+				<div class="span3">
+					% include layout/three/secondary.html params=params.secondary, config=config
+					% include layout/three/primary.html params=params.primary, config=config
+				</div>
+				<div class="span9">
+					<div id="excerpts">
+					% for entry in params.entries:
+						% include modules/excerpt.html excerpt=entry, config=config
+					% end
+					</div>
+					% include modules/pager.html pager=params.pager, config=config
+				</div>
+				<!--
+				<div class="span3">
+				</div>
+				-->
+
+			</div>
+		</div>
+	</div>
+	% include layout/footer.html config=config
+</body>
+<style type="text/css">
+    #sub_menu_1,#sub_menu_2{
+      display: none;
+    }
+    ul li:hover{
+      cursor: pointer;
+    }
+</style>
+<script language="javascript">
+    function f(str){
+        var sub_menu = document.getElementById(str);
+        var dis_v = sub_menu.style.display;
+
+        if(dis_v == "block")
+          sub_menu.style.display = "none";
+        else
+          sub_menu.style.display = "block";
+
+      }
+</script>
+
+</html>

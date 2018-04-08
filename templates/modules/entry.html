@@ -1,0 +1,22 @@
+<div class="entry">
+	<div class="entry entry-detail">
+		<div class="entry-header">
+			<h1 class="entry-title">{{ entry.name }}</h1>
+			<div class="entry-meta">
+				<span class="entry-by">
+					<i class="icon-user"></i> <a href="{{ entry.author.url }}">{{ entry.author.name }}</a> on {{ entry.time }} 
+					% if config.cur_user():
+					<a href="{{ entry.update_url }}"><i class="icon-edit"></i></a>
+						% if entry.type=='entry':
+						<a href="javascript:void(0);" onclick="delete_post('{{ entry.raw_url }}');"><i class="icon-remove-sign"></i></a>
+						% end
+					% end
+				</span>
+			</div>
+		</div>
+		<div class="entry-content" id="entry-content" style="padding: 0px">
+			<textarea id="append-content" style="display:none;">{{! entry.parse_content or entry.content }}</textarea>
+		</div>
+	</div>
+</div>
+
