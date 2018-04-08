@@ -161,20 +161,26 @@ class EntryService:
                 if '---' in start.strip():
                     layout_raw = f.readline()
                     title_raw = f.readline()
-                    category_raw = f.readline()
+                    category1_raw = f.readline()
+                    category2_raw = f.readline()
+                    category3_raw = f.readline()
                     tags_raw = f.readline()
                     #author_raw = f.readline()
                     end = f.readline()
                     content = f.read().strip()
                     #print layout_raw,title_raw,category_raw,tags_raw
                     title = title_raw.split(':')[1].strip()
-                    categories_str = category_raw.split(':')[1].strip()
-                    categories = categories_str and categories_str.split(',') or []
+                    categories_str = category1_raw.split(':')[1].strip()
+                    categories1 = categories_str and categories_str.split(',') or []
+                    categories_str = category2_raw.split(':')[1].strip()
+                    categories2 = categories_str and categories_str.split(',') or []
+                    categories_str = category3_raw.split(':')[1].strip()
+                    categories3 = categories_str and categories_str.split(',') or []
                     tags_str = tags_raw.split(':')[1].strip()[1:-1]
                     tags = tags_str and tags_str.split(',') or []
                     header = ''.join([start, layout_raw, title_raw, category_raw, tags_raw, end])
                 else:
-                    title, categories, tags, header = '', [], [], ''
+                    title, categories1,categories2,categories3, tags, header = '', [], [], [], [], ''
                 
             if title:
                 entry.name = title
@@ -191,7 +197,9 @@ class EntryService:
             else:
                 entry.html = ''
             entry.excerpt = content[:200] + ' ... ...'
-            entry.categories = categories
+            entry.categories1 = categories1
+            entry.categories2 = categories2
+            entry.categories3 = categories3
             entry.tags = tags
             if len(tags)>0:
                 first_tag = tags[0]
@@ -268,7 +276,9 @@ class EntryService:
         for entry in entries:
             if not entry.private:
                 self._init_tag(init_type, entry.url, entry.tags)
-                self._init_category(init_type, entry.url, entry.categories)
+                self._init_category(init_type, entry.url, entry.categories1)
+                self._init_category(init_type, entry.url, entry.categories2)
+                self._init_category(init_type, entry.url, entry.categories3)
                 self._init_monthly_archive(init_type, entry.url)
         self.update_urls()
         self._init_params()

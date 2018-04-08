@@ -164,7 +164,9 @@ def SaveHead():
         return {'code': -2, 'msg': '未登录'}
 
     title = request.POST.get("title", '').strip()
-    cat = request.POST.get("cat", '').strip().replace('，', ',')
+    cat1 = request.POST.get("cat1", '').strip().replace('，', ',')
+    cat2 = request.POST.get("cat2", '').strip().replace('，', ',')
+    cat3 = request.POST.get("cat3", '').strip().replace('，', ',')
     tag = request.POST.get("tag", '').strip().replace('，', ',')
     private = request.POST.get("private", '')
     content = request.POST.get("content", '').strip()
@@ -185,10 +187,12 @@ def SaveHead():
     head = '''---
 layout: post
 title: %s
-category: %s
+category1: %s
+category2: %s
+category3: %s
 tags: [%s]
 ---
-    ''' % (title, cat, tag)
+    ''' % (title, cat1, cat2, cat3, tag)
 
     m_file = open(entry.path, 'w+')
     m_file.write('%s\n%s' % (head, content))
@@ -197,7 +201,9 @@ tags: [%s]
     entryService.update_entry(entry, {
         'title': title,
         'tags': tag and tag.split(',') or [],
-        'cats': cat and cat.split(',') or [],
+        'cats': cat1 and cat1.split(',') or [],
+        'cats': cat2 and cat2.split(',') or [],
+        'cats': cat3 and cat3.split(',') or [],
         'private': bool(private)
     })
     return {'code': 0, 'msg': '修改成功'}
@@ -249,10 +255,12 @@ def UpdateSave():
     head = '''---
 layout: post
 title: %s
-category: %s
+category1: %s
+category2: %s
+category3: %s
 tags: [%s]
 ---
-    ''' % (entry.name, entry.categories and ','.join(entry.categories) or '', entry.tags and ','.join(entry.tags) or '')
+    ''' % (entry.name, entry.categories and ','.join(entry.categories) or '', entry.categories and ','.join(entry.categories) or '', entry.categories and ','.join(entry.categories) or '', entry.tags and ','.join(entry.tags) or '')
     m_file.write('%s\n%s' % (head, content))
     m_file.close()
     file_name = entry.path.replace(config.entry_dir,'')

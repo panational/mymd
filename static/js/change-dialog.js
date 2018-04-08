@@ -68,7 +68,9 @@
                     buttons : {
                         enter : ['保存', function() {
                             var title  = this.find("[data-title]").val();
-                            var cat  = this.find("[data-cat1]").val() + "_" + this.find("[data-cat2]").val() + "_" + this.find("[data-cat3]").val();
+                            var cat1  = this.find("[data-cat1]").val();
+                            var cat2  = this.find("[data-cat2]").val();
+                            var cat3  = this.find("[data-cat3]").val();
                             var tag = this.find("[data-tag]").val();
                             var private = document.getElementById("private").checked;
 
@@ -85,7 +87,9 @@
 							    data:{
 							    	raw_url: raw_url,
 							    	title: title,
-							    	cat: cat,
+							    	cat1: cat1,
+							    	cat2: cat2,
+							    	cat3: cat2,
 							    	tag: tag,
 							    	private: private?'on': '',
 							    	content: cm.getValue()
@@ -122,7 +126,9 @@
 
 			dialog = editor.find("." + dialogName);
 			dialog.find("[data-title]").val(init.title);
-			dialog.find("[data-cat]").val(init.cat);
+			dialog.find("[data-cat1]").val(init.cat1);
+			dialog.find("[data-cat2]").val(init.cat2);
+			dialog.find("[data-cat3]").val(init.cat3);
 			dialog.find("[data-tag]").val(init.tag);
 			document.getElementById("private").checked = init.private;
 
