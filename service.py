@@ -276,9 +276,7 @@ class EntryService:
         for entry in entries:
             if not entry.private:
                 self._init_tag(init_type, entry.url, entry.tags)
-                self._init_category(init_type, entry.url, entry.categories1)
-                self._init_category(init_type, entry.url, entry.categories2)
-                self._init_category(init_type, entry.url, entry.categories3)
+                self._init_category(init_type, entry.url, entry.categories)
                 self._init_monthly_archive(init_type, entry.url)
         self.update_urls()
         self._init_params()

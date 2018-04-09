@@ -72,7 +72,7 @@
                     buttons : {
                         enter : ['确定发布', function() {
                             var url  = this.find("[data-url]").val();
-                            var alt  = this.find("[data-alt1]").val() + "_" + this.find("[data-alt2]").val() + "_" + this.find("[data-alt3]").val();
+                            var alt  = this.find("[data-alt1]").val() + "," + this.find("[data-alt2]").val() + "," + this.find("[data-alt3]").val();
                             var link = this.find("[data-link]").val();
                             var name = this.find("[data-name]").val();
                             var private = document.getElementById("private").checked;
