@@ -1,0 +1,41 @@
+﻿﻿<!-- config -->
+<div id="header">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+    	<div class="navbar-inner">
+    		<div class="container">
+    			<a class="btn btn-navbar" data-toggle="collapse"
+    				data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+    				class="icon-bar"></span> <span class="icon-bar"></span>
+    			</a><a class="brand" href="/">{{ config.name }}</a>
+    			<div class="nav-collapse collapse">
+    				<ul class="nav">
+    					<li><a href="/"> {{ _("index_home") }}</a></li>
+    					<li><a href="{{ config.archive_url }}"> {{ _("index_index") }}</a></li>
+    					<li><a href="{{ config.about_url }}"> {{_("index_about")}}</a></li>
+    					% if config.cur_user():
+    					<li><a href="{{ config.raw_url }}"> {{_("index_raw")}}</a></li>
+    					% end
+    					<li><a href="{{ config.subscribe_url }}"> {{_("index_subscribe")}}</a></li>
+    					<li><a href="/new" target="_BLANK"> {{_("index_editer")}}</a></li>
+    				</ul>
+    				% if config.cur_user():
+    				<ul class="nav pull-right">
+    					<li><a href="{{ config.private_url }}" title="进入私人空间"> {{ config.cur_user() }}</a></li>
+    					<li><a href="/auth/logout"><i class="icon-off icon-white"></i> {{ _("index_exit") }}</a></li>
+    				</ul>
+    				% else:
+    				<ul class="nav pull-right">
+    					<li><a href="/auth/login"> {{ _("index_login") }}</a></li>
+    				</ul>
+    				% end
+    				<form class="navbar-search pull-right" method="GET" action="{{ config.search_url }}">
+    					<i class="icon-search icon-white"></i><input type="text" class="search-query span2" name="value" placeholder="{{ _("search_holder") }}"/>
+    					<input type="hidden" name="type" value="query" />
+                		<input type="hidden" name="start" value="{{ config.start }}" />
+                		<input type="hidden" name="limit" value="{{ config.limit }}" />
+    				</form>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<!-- title excerpt -->
+<div class="excerpt excerpt-detail">
+	<div class="excerpt-header">
+		<h3 class="excerpt-title"><a href="{{ excerpt.url }}">{{ excerpt.name }}</a></h3>
+		<div class="excerpt-meta">
+			<span class="excerpt-by"><i class="icon-user"></i>  <a href="{{ excerpt.author.url }}">{{ excerpt.author.name }}</a>
+				on {{ excerpt.time }}
+			</span>
+            % if excerpt.categories:
+            &nbsp;
+			<span class="excerpt-by"><i class="icon-folder-open"></i> 
+                    % for category in excerpt.categories:
+                        <a href="{{ config.search_url }}?type=category&value={{ category }}&start={{ config.start }}&limit={{ config.limit }}">{{ category }}</a>
+                    % end
+			</span>
+            % end
+            % if len(excerpt.tags)>1:
+            &nbsp;
+			<span class="excerpt-by"><i class="icon-tags"></i>
+                    % for tag in excerpt.tags:
+                        % if not tag.startswith('__'):
+                            <a href="{{ config.search_url }}?type=tag&value={{ tag }}&start={{ config.start }}&limit={{ config.limit }}">{{ tag }}</a>
+                        % end
+                    % end
+			</span>
+            % end
+		</div>
+	</div>
+	<div class="excerpt-content">{{ excerpt.excerpt }}</div>
+	<div class="excerpt-more">
+		<!--<i class="icon-share-alt"></i> <a href="$excerpt.url"> $excerpt.name</a>-->
+	</div>
+    <a href="{{ excerpt.url }}" class="btn btn-default">阅读全文</a> 
+    <hr/>
+</div>
